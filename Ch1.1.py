@@ -3,24 +3,20 @@
 #               Data, and Also show the mean, Variance, and Sta.Dev.
 #               Not the sample use the Population versions.
 
+import json
 import numpy
 import matplotlib
 from scipy import stats
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plot
 
-values = [  25.8, 14.3, 16.9, 18.1, 40.2, 21.3, 19.7, 15.6, 
-            14.8, 30.5, 39.7, 20.0, 16.2, 15.2, 14.5, 20.8, 
-            76.0, 20.0, 18.3, 45.5, 14.9, 17.7, 15.5, 19.4, 
-            17.2, 19.5, 15.8, 44.3, 18.5, 14.7, 20.0, 18.7, 
-            19.8, 19.2, 50.6, 15.1, 23.6, 17.4, 15.7, 16.4, 
-            17.1, 23.4, 17.8, 16.8
-        ]
+# Loads information from a Json file
+input_file = open('Ch1Data.json')
+data = json.load(input_file)
 
-# for x in values:
-#     print(x)
+# Parse the Ch1.2 Data into a local array
+values = data['Ch1.2']
 
 res = stats.relfreq(values, numbins=4)
-res.frequency
 numpy.sum( res.frequency )
 
 x = res.lowerlimit + numpy.linspace(
@@ -28,11 +24,22 @@ x = res.lowerlimit + numpy.linspace(
         res.binsize*res.frequency.size,
         res.frequency.size)
 
-fig = plt.figure(figsize=(5, 4))
+# Configure the histogram that will be shown.
+fig = plot.figure(figsize=(5, 4))
 ax = fig.add_subplot(1, 1, 1)
 ax.bar(x, res.frequency, width=res.binsize)
 ax.set_title('Relative frequency histogram for 1.1')
 ax.set_xlim([x.min(), x.max()])
 
-# simply shows the plt that is configured above.
-plt.show()
+numpy.mean(values)
+
+mean     = 'mean      : {}'.format( numpy.mean(values) )
+variance = "variance : {}".format(numpy.var(values,ddof=1))
+stdDev   = "stdDev   : {}".format(numpy.std(values, ddof=1))
+
+plotText = '{}\n{}\n{}'.format(mean, variance, stdDev)
+
+plot.text(0.5, 0.5, plotText, horizontalalignment='center', verticalalignment='center', transform=ax.transAxes)
+
+# simply shows the plot that is configured above.
+plot.show()
