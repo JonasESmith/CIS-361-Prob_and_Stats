@@ -1,3 +1,8 @@
+# Programmer : Jonas Smith
+# Purpose    : A simple project to show the histogram for a set of 
+#               Data, and Also show the mean, Variance, and Sta.Dev.
+#               Not the sample use the Population versions.
+
 import numpy
 import matplotlib
 from scipy import stats
@@ -26,10 +31,8 @@ x = res.lowerlimit + numpy.linspace(
 fig = plt.figure(figsize=(5, 4))
 ax = fig.add_subplot(1, 1, 1)
 ax.bar(x, res.frequency, width=res.binsize)
-ax.set_title('Relative frequency histogram')
+ax.set_title('Relative frequency histogram for 1.1')
 ax.set_xlim([x.min(), x.max()])
 
-
+# simply shows the plt that is configured above.
 plt.show()
-# I should probably use python 3.7 for this project 
-#       as of now because 2.7 is lame as fuck
