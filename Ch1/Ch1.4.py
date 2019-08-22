@@ -14,7 +14,7 @@ input_file = open('Ch1Data.json')
 data = json.load(input_file)
 assignmentNum = 'Ch1.4'
 
-# Parse the Ch1.2 Data into a local array
+# Parse the Ch1.4 Data into a local array
 values = data[assignmentNum]
 
 res = stats.relfreq(values, numbins=4)
@@ -40,6 +40,7 @@ stdDev   = "stdDev   : {}".format(numpy.std(values, ddof=1))
 
 plotText = '{}\n{}\n{}'.format(mean, variance, stdDev)
 
+# add text to the plot
 plot.text(0.5, 0.5, plotText, horizontalalignment='center', verticalalignment='center', transform=ax.transAxes)
 
 # simply shows the plot that is configured above.
