@@ -28,7 +28,7 @@ x = res.lowerlimit + numpy.linspace(
 fig = plot.figure(figsize=(5, 4))
 ax = fig.add_subplot(1, 1, 1)
 ax.bar(x, res.frequency, width=res.binsize)
-ax.set_title('Relative frequency histogram for 1.1')
+ax.set_title('Relative frequency histogram for 1.2')
 ax.set_xlim([x.min(), x.max()])
 
 numpy.mean(values)
