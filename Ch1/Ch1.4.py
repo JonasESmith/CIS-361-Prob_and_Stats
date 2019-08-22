@@ -12,9 +12,10 @@ import matplotlib.pyplot as plot
 # Loads information from a Json file
 input_file = open('Ch1Data.json')
 data = json.load(input_file)
+assignmentNum = 'Ch1.4'
 
 # Parse the Ch1.2 Data into a local array
-values = data['Ch1.2']
+values = data[assignmentNum]
 
 res = stats.relfreq(values, numbins=4)
 numpy.sum( res.frequency )
@@ -28,12 +29,12 @@ x = res.lowerlimit + numpy.linspace(
 fig = plot.figure(figsize=(5, 4))
 ax = fig.add_subplot(1, 1, 1)
 ax.bar(x, res.frequency, width=res.binsize)
-ax.set_title('Relative frequency histogram for 1.2')
+ax.set_title('Relative frequency histogram for {}'.format(assignmentNum))
 ax.set_xlim([x.min(), x.max()])
 
 numpy.mean(values)
 
-mean     = 'mean      : {}'.format( numpy.mean(values) )
+mean     = "mean      : {}".format( numpy.mean(values) )
 variance = "variance : {}".format(numpy.var(values,ddof=1))
 stdDev   = "stdDev   : {}".format(numpy.std(values, ddof=1))
 
