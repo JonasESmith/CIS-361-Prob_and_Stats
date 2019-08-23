@@ -12,36 +12,49 @@ import matplotlib.pyplot as plot
 # Loads information from a Json file
 input_file = open('Ch1Data.json')
 data = json.load(input_file)
-assignmentNum = 'Ch1.4'
+assign_name = 'Ch1.4'
 
 # Parse the Ch1.4 Data into a local array
-values = data[assignmentNum]
+values = data[assign_name]
 
-res = stats.relfreq(values, numbins=4)
-numpy.sum( res.frequency )
+# This simply creates a histogram variable that we assign to 
+#       scipy's relfreq which is a relative frequency histogram
+# We then pass the values from above, and a numbers of bins 
+#       we want to associate with the data set.
+histogram = stats.relfreq(values, numbins=4)
+numpy.sum( histogram.frequency )
 
-x = res.lowerlimit + numpy.linspace(
+x = histogram.lowerlimit + numpy.linspace(
         0, 
-        res.binsize*res.frequency.size,
-        res.frequency.size)
+        histogram.binsize*histogram.frequency.size,
+        histogram.frequency.size)
+
 
 # Configure the histogram that will be shown.
 fig = plot.figure(figsize=(5, 4))
 ax = fig.add_subplot(1, 1, 1)
-ax.bar(x, res.frequency, width=res.binsize)
-ax.set_title('Relative frequency histogram for {}'.format(assignmentNum))
+# Creates the bars used in the Histogram.
+ax.bar( x, 
+        histogram.frequency, 
+        width=histogram.binsize)
+ax.set_title( 'Relative frequency histogram for {}'.format(assign_name))
 ax.set_xlim([x.min(), x.max()])
 
-numpy.mean(values)
-
-mean     = "mean      : {}".format( numpy.mean(values) )
-variance = "variance : {}".format(numpy.var(values,ddof=1))
+mean     = "mean     : {}".format( numpy.mean(values) )
+variance = "variance : {}".format(numpy.var(values, ddof=1))
 stdDev   = "stdDev   : {}".format(numpy.std(values, ddof=1))
 
 plotText = '{}\n{}\n{}'.format(mean, variance, stdDev)
 
 # add text to the plot
-plot.text(0.5, 0.5, plotText, horizontalalignment='center', verticalalignment='center', transform=ax.transAxes)
+plot.text(
+        0.5, 
+        0.5, 
+        plotText, 
+        horizontalalignment='center', 
+        verticalalignment='center', 
+        transform=ax.transAxes
+        )
 
 # simply shows the plot that is configured above.
 plot.show()
