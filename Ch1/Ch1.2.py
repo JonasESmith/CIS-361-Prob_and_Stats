@@ -23,7 +23,7 @@ values = data[assign_name]
 #       scipy's relfreq which is a relative frequency histogram
 # We then pass the values from above, and a numbers of bins 
 #       we want to associate with the data set.
-histogram = stats.relfreq(values, numbins=4)
+histogram = stats.relfreq(values, numbins=10)
 numpy.sum( histogram.frequency )
 
 x = histogram.lowerlimit + numpy.linspace(
